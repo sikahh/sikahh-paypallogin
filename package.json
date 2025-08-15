@@ -1,0 +1,23 @@
+{
+  "name": "paypal-landing-page",
+  "version": "1.0.0",
+  "description": "PayPal Landing Page with Local Data Storage",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo 'Static site - no build required'",
+    "test": "echo 'No tests specified'"
+  },
+  "keywords": [
+    "paypal",
+    "landing-page",
+    "github-pages",
+    "static-site"
+  ],
+  "author": "PayPal Landing Page",
+  "license": "MIT",
+  "homepage": "https://yourusername.github.io/repository-name",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/repository-name.git"
+  }
+}

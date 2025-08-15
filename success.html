@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Successful - PayPal</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .success-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .success-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 50px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .success-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #48bb78, #38a169);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            animation: bounceIn 0.8s ease-out 0.3s both;
+        }
+        
+        .success-icon i {
+            font-size: 60px;
+            color: white;
+        }
+        
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .success-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+        
+        .success-message {
+            font-size: 18px;
+            color: #4a5568;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .transaction-details {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 30px;
+            margin: 30px 0;
+            border-left: 4px solid #48bb78;
+        }
+        
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .detail-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            color: #4a5568;
+        }
+        
+        .detail-value {
+            font-weight: 700;
+            color: #2d3748;
+        }
+        
+        .amount-highlight {
+            color: #48bb78;
+            font-size: 24px;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 15px 30px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: #f8fafc;
+            color: #4a5568;
+            border: 2px solid #e2e8f0;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .receipt-note {
+            background: #e6fffa;
+            border: 1px solid #38b2ac;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 30px;
+            color: #2d3748;
+        }
+        
+        .receipt-note i {
+            color: #38b2ac;
+            margin-left: 10px;
+        }
+        
+        @media (max-width: 600px) {
+            .success-card {
+                padding: 30px 20px;
+                margin: 0 10px;
+            }
+            
+            .success-icon {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .success-icon i {
+                font-size: 50px;
+            }
+            
+            .success-title {
+                font-size: 24px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .detail-row {
+                flex-direction: column;
+                text-align: center;
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <div class="success-card">
+            <div class="success-icon">
+                <i class="fas fa-check"></i>
+            </div>
+            
+            <h1 class="success-title">🎉 Congratulations!</h1>
+            <p class="success-message">
+                Your $100 PayPal credit has been successfully added to your account!<br>
+                <strong>100% FREE</strong> - No fees charged. You've received the full <strong>$100.00</strong>
+            </p>
+            
+            <div class="transaction-details">
+                <div class="detail-row">
+                    <span class="detail-label">Transaction ID:</span>
+                    <span class="detail-value" id="transactionId">---</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Free Credit Received:</span>
+                    <span class="detail-value amount-highlight">$100.00 USD</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Total Amount Paid:</span>
+                    <span class="detail-value" style="color: #28a745; font-weight: 700;">$0.00 USD (FREE!)</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Date & Time:</span>
+                    <span class="detail-value" id="paymentDate">---</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Transaction Status:</span>
+                    <span class="detail-value" style="color: #48bb78;">
+                        <i class="fas fa-check-circle"></i>
+                        Completed
+                    </span>
+                </div>
+            </div>
+            
+            <div class="receipt-note">
+                <i class="fas fa-info-circle"></i>
+                <strong>Note:</strong> This is a test transaction for demo purposes only. No actual charges have been made to your account.
+            </div>
+            
+            <div class="action-buttons">
+                <a href="checkout.html" class="btn btn-primary">
+                    <i class="fas fa-plus"></i>
+                    New Payment
+                </a>
+                <a href="#" onclick="window.print()" class="btn btn-secondary">
+                    <i class="fas fa-print"></i>
+                    Print Receipt
+                </a>
+                <a href="index.html" class="btn btn-secondary">
+                    <i class="fas fa-home"></i>
+                    Back to Home
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // استخراج البيانات من URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const transactionId = urlParams.get('transaction_id');
+        const amount = urlParams.get('amount');
+        
+        // عرض البيانات
+        if (transactionId) {
+            document.getElementById('transactionId').textContent = transactionId;
+        }
+        
+        if (amount) {
+            document.getElementById('paymentAmount').textContent = '$' + amount + ' USD';
+        }
+        
+        // عرض التاريخ والوقت الحالي
+        const now = new Date();
+        const dateOptions = {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            timeZone: 'America/New_York'
+        };
+        document.getElementById('paymentDate').textContent = now.toLocaleDateString('en-US', dateOptions);
+        
+        // تأثير الاحتفال
+        function createConfetti() {
+            const colors = ['#667eea', '#764ba2', '#48bb78', '#38a169'];
+            
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.style.position = 'fixed';
+                    confetti.style.width = '6px';
+                    confetti.style.height = '6px';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.left = Math.random() * window.innerWidth + 'px';
+                    confetti.style.top = '-10px';
+                    confetti.style.zIndex = '9999';
+                    confetti.style.borderRadius = '50%';
+                    confetti.style.pointerEvents = 'none';
+                    
+                    document.body.appendChild(confetti);
+                    
+                    const animation = confetti.animate([
+                        { transform: 'translateY(0px) rotate(0deg)', opacity: 1 },
+                        { transform: `translateY(${window.innerHeight + 100}px) rotate(720deg)`, opacity: 0 }
+                    ], {
+                        duration: 3000 + Math.random() * 2000,
+                        easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+                    });
+                    
+                    animation.onfinish = () => {
+                        confetti.remove();
+                    };
+                }, i * 50);
+            }
+        }
+        
+        // تشغيل تأثير الاحتفال عند تحميل الصفحة
+        window.addEventListener('load', () => {
+            setTimeout(createConfetti, 500);
+        });
+    </script>
+</body>
+</html>
