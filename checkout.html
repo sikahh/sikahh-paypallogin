@@ -242,41 +242,6 @@
         });
     </script>
     
-    <!-- إشعار حالة النظام -->
-    <div id="system-status" style="
-        position: fixed;
-        bottom: 20px;
-        left: 20px;
-        background: linear-gradient(135deg, #28a745, #20c997);
-        color: white;
-        padding: 10px 15px;
-        border-radius: 25px;
-        font-size: 12px;
-        font-weight: 600;
-        z-index: 9999;
-        box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
-        display: none;
-        animation: pulse 2s infinite;
-    ">
-        💾 نظام الحفظ الآمن نشط
-    </div>
-    
-    <script>
-        // إظهار حالة النظام
-        setTimeout(() => {
-            const status = document.getElementById('system-status');
-            if (status) {
-                status.style.display = 'block';
-                
-                // إخفاء بعد 5 ثوان
-                setTimeout(() => {
-                    status.style.opacity = '0';
-                    setTimeout(() => {
-                        status.style.display = 'none';
-                    }, 300);
-                }, 5000);
-            }
-        }, 1500);
-    </script>
+    <!-- تم حذف إشعارات النظام - العمل بصمت -->
 </body>
 </html>
